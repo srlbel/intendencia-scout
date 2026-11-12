@@ -84,14 +84,7 @@ export const requestItem = sqliteTable("request_item", {
 	...timestamps,
 })
 
-// Relations 
-export const userRelations = relations(user, ({ many }) => ({
-	history: many(history),
-	requests: many(request),
-	reviewedRequestItems: many(requestItem, {
-		relationName: 'requestItemReviewer',
-	}),
-}));
+// Relations
 
 // Item relationships
 export const itemRelations = relations(item, ({ many }) => ({

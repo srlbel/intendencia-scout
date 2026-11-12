@@ -11,10 +11,14 @@ export const auth = betterAuth({
 	secret: BETTER_AUTH_SECRET,
 	database: drizzleAdapter(db, { provider: 'sqlite' }),
 	emailAndPassword: {
-		enabled: true,
+    enabled: true,
+		disableSignUp: true
 	},
 	plugins: [
-		admin(),
+    admin({
+      defaultRole: 'user',
+      adminRoles: ['admin']
+		}),
 		sveltekitCookies(getRequestEvent) // make sure this is the last plugin in the array
 	]
 });

@@ -16,7 +16,7 @@
 	const overdueCount = $derived(dash.activeLoans.filter((l) => l.overdue).length);
 </script>
 
-<section class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+<section class="grid grid-cols-2 gap-4 lg:grid-cols-4">
 	<Card.Root>
 		<Card.Header class="pb-2">
 			<Card.Description>Préstamos activos</Card.Description>

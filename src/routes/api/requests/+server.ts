@@ -1,5 +1,5 @@
 import { error, json } from '@sveltejs/kit';
-import { desc, eq, inArray } from 'drizzle-orm';
+import { desc, eq, inArray, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { db } from '#lib/server/db/index.ts';
 import { item, request, requestItem, user } from '#lib/server/db/schema.ts';
@@ -14,23 +14,31 @@ const createSchema = z.object({
 
 // Admin → all requests. User → only their own.
 export const GET: RequestHandler = async ({ locals }) => {
-	const me = requireUser(locals);
+  const me = requireUser(locals);
+
+  const count = (s: 'pendiente' | 'aceptado' | 'rechazado') =>
+		sql<number>`coalesce(sum(${requestItem.status} = ${s}), 0)`.mapWith(Number);
 
 	const rows = await db
-		.select({
-			id: request.id,
-			purpose: request.purpose,
-			requestedAt: request.requestedAt,
-			reviewedAt: request.reviewedAt,
-			userId: user.id,
-			userName: user.name
-		})
-		.from(request)
-		.innerJoin(user, eq(user.id, request.userId))
-		.where(me.role === 'admin' ? undefined : eq(request.userId, me.id))
-		.orderBy(desc(request.requestedAt));
+			.select({
+				id: request.id,
+				purpose: request.purpose,
+				requestedAt: request.requestedAt,
+				reviewedAt: request.reviewedAt,
+				userId: user.id,
+				userName: user.name,
+				pendiente: count('pendiente'),
+				aceptado: count('aceptado'),
+				rechazado: count('rechazado')
+			})
+			.from(request)
+			.innerJoin(user, eq(user.id, request.userId))
+			.leftJoin(requestItem, eq(requestItem.requestId, request.id))
+			.where(me.role === 'admin' ? undefined : eq(request.userId, me.id))
+			.groupBy(request.id, user.id)
+			.orderBy(desc(request.requestedAt));
 
-	return json(rows);
+	return Response.json(rows);
 };
 
 export const POST: RequestHandler = async ({ locals, request: req }) => {

@@ -17,7 +17,7 @@
 	]);
 </script>
 
-<section class="grid grid-cols-2 gap-4 lg:grid-cols-5">
+<section class="grid grid-cols-2 gap-4 xl:grid-cols-5">
 	{#each stats as s}
 		<a href={s.href} class="contents">
 			<Card.Root class="transition-colors hover:bg-muted/50">
@@ -30,7 +30,7 @@
 	{/each}
 
 	<a href="/requests" class="contents">
-		<Card.Root class="col-span-2 transition-colors hover:bg-muted/50 lg:col-span-1">
+		<Card.Root class="col-span-2 transition-colors hover:bg-muted/50 xl:col-span-1">
 			<Card.Header class="pb-2">
 				<Card.Description>Solicitudes pendientes</Card.Description>
 				<Card.Title class="text-3xl">

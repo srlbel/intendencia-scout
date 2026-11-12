@@ -13,7 +13,7 @@
         "@fontsource-variable/roboto": "^5.3.0",
         "@internationalized/date": "^3.12.0",
         "@libsql/client": "^0.17.3",
-        "@lucide/svelte": "^1.70.0",
+        "@lucide/svelte": "^1.72.0",
         "@sveltejs/adapter-cloudflare": "^8.0.0",
         "@sveltejs/kit": "^3.0.0",
         "@sveltejs/vite-plugin-svelte": "^7.2.0",
@@ -316,7 +316,7 @@
 
     "@libsql/win32-x64-msvc": ["@libsql/win32-x64-msvc@0.5.29", "", { "os": "win32", "cpu": "x64" }, "sha512-4/0CvEdhi6+KjMxMaVbFM2n2Z44escBRoEYpR+gZg64DdetzGnYm8mcNLcoySaDJZNaBd6wz5DNdgRmcI4hXcg=="],
 
-    "@lucide/svelte": ["@lucide/svelte@1.70.0", "", { "peerDependencies": { "svelte": "^5" } }, "sha512-zvx7K/WLxo82c4ZYqbsfcYUPDVFrq4561xH0NHfSHJJbajj0AONTQ14EO095/WnfI4XUEl1tyS/nbjQNNiNxdQ=="],
+    "@lucide/svelte": ["@lucide/svelte@1.72.0", "", { "peerDependencies": { "svelte": "^5" } }, "sha512-DRwtZ5p/m5ZRsNlfCzELJRDzd2z19mc76eMs8rwllx/JWfvykmLoTFs3RyzFN519ldQxHt8Jxum/LKukgzuTLQ=="],
 
     "@mrleebo/prisma-ast": ["@mrleebo/prisma-ast@0.16.0", "", { "dependencies": { "chevrotain": "^12.0.0", "lilconfig": "^2.1.0" } }, "sha512-a9ELYNIflEQP38tSu6gnUgSAWgXjuhMvC52868K5sWgyRmYsjiJMWTUmm8iy7hZT5EN2ZKVydMTFP2q3/+6ccg=="],
 

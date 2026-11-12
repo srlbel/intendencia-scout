@@ -14,7 +14,7 @@ const timestamps = {
 
 export const item = sqliteTable('item', {
 	id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
-	sku: text('sku').notNull().unique(),
+	sku: text('sku').notNull(),
 	name: text('name').notNull(),
 	imageUrl: text("image_url"),
 	location: text('location').notNull(),

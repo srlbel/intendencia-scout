@@ -5,7 +5,7 @@
 	let { data } = $props();
 </script>
 
-<div class="mx-auto grid max-w-6xl gap-6 p-4 md:p-8">
+<div class="grid gap-6">
 	<h1 class="text-2xl font-semibold">Panel</h1>
 
 	{#if data.dash.role === 'admin'}

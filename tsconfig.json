@@ -6,7 +6,8 @@
 			"$app/types",
 			"node",
 			"./worker-configuration.d.ts"
-		]
+		],
+		"allowImportingTsExtensions": true
 	},
 	"include": [
 		"src",

@@ -15,24 +15,32 @@ const createSchema = z.object({
 	status: z.enum(['disponible', 'prestado', 'desconocido']).optional()
 });
 
+const normalize = (s: string) =>
+	s
+		.normalize('NFD')
+		.replace(/\p{Diacritic}/gu, '')
+		.toLowerCase();
+
 export const GET: RequestHandler = async ({ locals, url }) => {
 	requireAdmin(locals);
-	const q = url.searchParams.get('q')?.trim();
+	const q = normalize(url.searchParams.get('q')?.trim() ?? '');
 	const status = url.searchParams.get('status');
-
-	const filters = [
-		q ? or(like(item.name, `%${q}%`), like(item.sku, `%${q}%`)) : undefined,
-		status === 'disponible' || status === 'prestado' || status === 'desconocido'
-			? eq(item.status, status)
-			: undefined
-	];
 
 	const rows = await db
 		.select()
 		.from(item)
-		.where(and(...filters))
+		.where(
+			status === 'disponible' || status === 'prestado' || status === 'desconocido'
+				? eq(item.status, status)
+				: undefined
+		)
 		.orderBy(asc(item.name));
-	return json(rows);
+
+	const result = q
+		? rows.filter((r) => normalize(r.name).includes(q) || normalize(r.sku).includes(q))
+		: rows;
+
+	return json(result);
 };
 
 export const POST: RequestHandler = async ({ locals, request }) => {

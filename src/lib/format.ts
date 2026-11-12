@@ -8,3 +8,9 @@ export function daysLate(expected: string | null) {
 	if (!expected) return 0;
 	return Math.max(0, Math.floor((Date.now() - new Date(expected).getTime()) / 86_400_000));
 }
+
+export const normalize = (s: string) =>
+	s
+		.normalize('NFD')
+		.replace(/\p{Diacritic}/gu, '')
+		.toLowerCase();
